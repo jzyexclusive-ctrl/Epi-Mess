@@ -1,11 +1,11 @@
 // ─── Firebase Setup ───────────────────────────────────────────────────────────
 const firebaseConfig = {
-  apiKey: "AIzaSyCRRJNVV_JCWL1amTcuqq1Up6sVJuhlnXI",
-  authDomain: "portfolio-361f3.firebaseapp.com",
-  projectId: "portfolio-361f3",
-  storageBucket: "portfolio-361f3.firebasestorage.app",
-  messagingSenderId: "485971815698",
-  appId: "1:485971815698:web:fcd7d4ab781785910c97cb"
+  apiKey: "AIzaSyDA-h-ci_QC-nbvBXNzW4NMpbFYSJh72R0",
+  authDomain: "epi-mess.firebaseapp.com",
+  projectId: "epi-mess",
+  storageBucket: "epi-mess.firebasestorage.app",
+  messagingSenderId: "1003657776517",
+  appId: "1:1003657776517:web:68c187cce0503da17748ec"
 };
 
 let db = null;
