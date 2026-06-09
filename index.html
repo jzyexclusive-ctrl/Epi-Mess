@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EPI MESS | Smart Mess Management System</title>
+  <meta name="description" content="Smart Mess Management System with premium KFC-inspired design and student dining features." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page-glow"></div>
+  <div class="cursor-glow"></div>
+
+  <header class="topbar" id="top">
+    <nav class="nav container">
+      <a class="logo" href="#home">
+        <span class="logo-mark">EPI</span>
+        <span class="logo-sub">MESS</span>
+      </a>
+
+      <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-links">
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#attendance">Attendance</a></li>
+        <li><a href="#booking">Meal Booking</a></li>
+        <li><a href="#feedback">Feedback</a></li>
+        <li><a href="#notifications">Notifications</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">☀️</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero section container reveal" id="home">
+      <div class="hero-copy">
+        <p class="eyebrow">Premium Student Dining • Smart Management</p>
+        <h1>Smart Dining Experience for <span id="heroText">Students</span></h1>
+        <p class="lead">Manage meals, check attendance, book your plates, and stay updated with the smartest mess experience on campus.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#booking">Book Meal</a>
+          <a class="btn btn-secondary" href="#menu">View Menu</a>
+        </div>
+        <ul class="hero-badges">
+          <li>Fast Booking</li>
+          <li>Live Menu</li>
+          <li>Attendance Insights</li>
+        </ul>
+      </div>
+
+      <div class="hero-visual">
+        <div class="floating-card card-main">
+          <p>Today’s Meal</p>
+          <h3>Spicy Chicken + Rice</h3>
+          <small>Fresh • Hot • Served on time</small>
+        </div>
+        <div class="floating-card card-side">🍽️ 4 Meals Left</div>
+        <div class="floating-card card-note">✔ Attendance 92%</div>
+        <div class="plate-orb"></div>
+      </div>
+    </section>
+
+    <section class="stats-strip container reveal">
+      <article class="stat-card"><strong class="count" data-target="98">0</strong><span>Student Satisfaction</span></article>
+      <article class="stat-card"><strong class="count" data-target="24">0</strong><span>Meals Booked Daily</span></article>
+      <article class="stat-card"><strong class="count" data-target="12">0</strong><span>Special Menu Items</span></article>
+      <article class="stat-card"><strong class="count" data-target="92">0</strong><span>Attendance Rate</span></article>
+    </section>
+
+    <section class="section container reveal" id="features">
+      <div class="section-heading">
+        <p class="eyebrow">Why EPI MESS</p>
+        <h2>Smart features designed for modern student life</h2>
+      </div>
+      <div class="grid cards-3">
+        <article class="glass-card"><div class="icon">📱</div><h3>QR Attendance System</h3><p>Scan and confirm meals with a smooth, instant attendance flow.</p></article>
+        <article class="glass-card"><div class="icon">🧾</div><h3>Meal Booking</h3><p>Reserve your preferred meals in seconds with one-click convenience.</p></article>
+        <article class="glass-card"><div class="icon">🍛</div><h3>Live Menu Updates</h3><p>See today’s menu, chef specials, and daily changes in real-time.</p></article>
+        <article class="glass-card"><div class="icon">⭐</div><h3>Feedback & Ratings</h3><p>Share reviews and help the mess improve its taste and service.</p></article>
+        <article class="glass-card"><div class="icon">🔔</div><h3>Student Notifications</h3><p>Get alerts for menu changes, closures, and special food days.</p></article>
+        <article class="glass-card"><div class="icon">📊</div><h3>Monthly Meal Analytics</h3><p>Track meal trends, attendance, and usage with simple visuals.</p></article>
+      </div>
+    </section>
+
+    <section class="section container reveal" id="dashboard">
+      <div class="section-heading"><p class="eyebrow">Student Dashboard</p><h2>Your smart mess overview</h2></div>
+      <div class="dashboard-grid">
+        <article class="glass-card dashboard-card"><h3>Today’s Meal</h3><p class="mega">Chicken Biryani</p><small>Lunch • 12:30 PM</small><div class="progress-group"><label>Meal Coverage</label><div class="progress-bar"><span style="width: 83%"></span></div></div></article>
+        <article class="glass-card dashboard-card"><h3>Attendance</h3><p class="mega">92%</p><small>Weekly consistency</small><div class="mini-chips"><span>Present: 23</span><span>Absent: 2</span></div></article>
+        <article class="glass-card dashboard-card"><h3>Upcoming Bookings</h3><ul class="booking-list"><li>Thu • Dinner • 2 meals</li><li>Fri • Breakfast • 1 meal</li><li>Sat • Snacks • 3 meals</li></ul></article>
+        <article class="glass-card dashboard-card"><h3>Alerts</h3><div class="alert-card">Menu update: New dessert added today.</div><div class="alert-card warning">Holiday notice: Mess closed on Sunday.</div></article>
+      </div>
+    </section>
+
+    <section class="section container reveal" id="menu">
+      <div class="section-heading"><p class="eyebrow">Weekly Menu</p><h2>Fresh weekly choices with daily highlights</h2></div>
+      <div class="menu-board">
+        <article class="menu-day active"><h3>Monday</h3><p><strong>Breakfast:</strong> Poha, Tea, Fruit</p><p><strong>Lunch:</strong> Paneer Masala, Rice, Roti</p><p><strong>Snacks:</strong> Samosa, Juice</p><p><strong>Dinner:</strong> Chicken Curry, Dal, Naan</p></article>
+        <article class="menu-day"><h3>Tuesday</h3><p><strong>Breakfast:</strong> Upma, Coffee, Banana</p><p><strong>Lunch:</strong> Veg Biryani, Curd</p><p><strong>Snacks:</strong> Pakora, Tea</p><p><strong>Dinner:</strong> Chole, Rice, Roti</p></article>
+        <article class="menu-day"><h3>Wednesday</h3><p><strong>Breakfast:</strong> Dosa, Chutney</p><p><strong>Lunch:</strong> Dal Tadka, Fryums</p><p><strong>Snacks:</strong> Sandwich, Shake</p><p><strong>Dinner:</strong> Egg Curry, Rice</p></article>
+        <article class="menu-day"><h3>Thursday</h3><p><strong>Breakfast:</strong> Paratha, Pickle</p><p><strong>Lunch:</strong> Veg Pulao, Salad</p><p><strong>Snacks:</strong> Muffin, Tea</p><p><strong>Dinner:</strong> Butter Chicken, Naan</p></article>
+        <article class="menu-day"><h3>Friday</h3><p><strong>Breakfast:</strong> Sandwich, Coffee, Juice</p><p><strong>Lunch:</strong> Chicken Fried Rice, Veg Curry</p><p><strong>Snacks:</strong> Cheese Toast, Shake</p><p><strong>Dinner:</strong> Fish Fry, Rice, Roti</p></article>
+        <article class="menu-day"><h3>Saturday</h3><p><strong>Breakfast:</strong> Masala Dosa, Sambar</p><p><strong>Lunch:</strong> Biryani, Raitha</p><p><strong>Snacks:</strong> Gulab Jamun, Tea</p><p><strong>Dinner:</strong> Paneer Butter Masala, Naan</p></article>
+        <article class="menu-day"><h3>Sunday</h3><p><strong>Breakfast:</strong> Aloo Paratha, Curd</p><p><strong>Lunch:</strong> Special Thali, Sweet</p><p><strong>Snacks:</strong> Cookies, Juice</p><p><strong>Dinner:</strong> Chicken Kebab, Rice, Salad</p></article>
+      </div>
+    </section>
+
+    <section class="section container reveal" id="booking">
+      <div class="section-heading"><p class="eyebrow">Meal Booking</p><h2>Book your next meal in a few taps</h2></div>
+      <div class="booking-grid">
+        <form class="glass-card booking-form" id="bookingForm">
+          <label>Date<input type="date" id="bookingDate" required /></label>
+          <label>Meal Type<select id="mealType" required><option value="">Choose meal</option><option>Breakfast</option><option>Lunch</option><option>Snacks</option><option>Dinner</option></select></label>
+          <label>Number of Meals<input type="number" id="mealCount" min="1" max="5" value="1" required /></label>
+          <button class="btn btn-primary btn-animate" type="submit">Confirm Booking</button>
+        </form>
+        <article class="glass-card booking-summary"><h3>Booking Preview</h3><p id="previewText">Select your desired date and meal to preview your booking.</p><div class="summary-badges"><span>Fast confirmation</span><span>Smart reminders</span><span>Flexible slot selection</span></div></article>
+      </div>
+    </section>
+
+    <section class="section container reveal" id="attendance">
+      <div class="section-heading"><p class="eyebrow">Attendance Tracker</p><h2>Weekly & monthly progress at a glance</h2></div>
+      <div class="attendance-grid">
+        <article class="glass-card ring-card"><div class="ring" id="ringWeekly"><strong>92%</strong></div><h3>Weekly Attendance</h3><p>23 present out of 25 meals this week.</p></article>
+        <article class="glass-card ring-card"><div class="ring" id="ringMonthly"><strong>88%</strong></div><h3>Monthly Attendance</h3><p>Improving consistency across the month.</p></article>
+        <article class="glass-card stats-card"><h3>Usage Stats</h3><div class="progress-group"><label>Breakfast usage</label><div class="progress-bar"><span data-width="74"></span></div></div><div class="progress-group"><label>Lunch usage</label><div class="progress-bar"><span data-width="89"></span></div></div><div class="progress-group"><label>Dinner usage</label><div class="progress-bar"><span data-width="68"></span></div></div></article>
+      </div>
+    </section>
+
+    <section class="section container reveal" id="feedback">
+      <div class="section-heading"><p class="eyebrow">Student Feedback</p><h2>What’s students love most about EPI MESS</h2></div>
+      <div class="review-slider glass-card" id="reviewSlider">
+        <article class="review active"><p>“The booking system feels premium and simple. Food quality is excellent and the notifications are super helpful.”</p><h3>Riya Sharma</h3><span>★★★★☆</span></article>
+        <article class="review"><p>“The menu updates are fast and the visuals make the whole mess system look modern and professional.”</p><h3>Arjun Verma</h3><span>★★★★★</span></article>
+        <article class="review"><p>“I love how easy it is to track my attendance and meal usage every week. Very smooth experience.”</p><h3>Meena K</h3><span>★★★★☆</span></article>
+      </div>
+    </section>
+
+    <section class="section container reveal" id="notifications">
+      <div class="section-heading"><p class="eyebrow">Notifications</p><h2>Important updates and spicy announcements</h2></div>
+      <div class="cards-3">
+        <article class="glass-card notify-card"><h3>Menu Change</h3><p>New dessert added today for evening snacks. Fresh and sweet.</p></article>
+        <article class="glass-card notify-card"><h3>Holiday Alert</h3><p>Mess will remain closed during the upcoming campus holiday.</p></article>
+        <article class="glass-card notify-card"><h3>Special Food Day</h3><p>Friday special: Butter chicken, naan, and premium salad bowl.</p></article>
+      </div>
+    </section>
+
+    <section class="section contact-section container reveal" id="contact">
+      <div class="glass-card contact-card">
+        <div><p class="eyebrow">Contact</p><h2>Reach the EPI MESS team</h2><p>Need support, menu details, or booking help? We’re here for you.</p></div>
+        <div class="contact-links">
+          <a href="mailto:epimess2304@gmail.com">Email: epimess2304@gmail.com</a>
+          <a href="tel:+91950028445">Phone: 950028445</a>
+          <a href="#">Campus Dining Block, EPI</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="container footer-grid"><div><h3>EPI MESS</h3><p>Smart Dining Experience for Students.</p></div><div><h4>Quick Links</h4><a href="#home">Home</a><a href="#menu">Menu</a><a href="#booking">Booking</a></div><div><h4>Social</h4><a href="#">Instagram</a><a href="#">X / Twitter</a><a href="#">LinkedIn</a></div><div><h4>Contact</h4><a href="mailto:epimess2304@gmail.com">epimess2304@gmail.com</a><a href="tel:+91950028445">950028445</a></div></div><p class="copyright">© 2026 EPI MESS | Smart Mess Management System</p></footer>
+
+  <div class="popup" id="bookingPopup" aria-live="polite"><div class="popup-card glass-card"><h3>Booking Confirmed</h3><p id="popupMessage">Your meal has been successfully reserved.</p><button class="btn btn-primary" id="closePopup">Close</button></div></div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore-compat.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
