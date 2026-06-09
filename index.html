@@ -32,6 +32,7 @@
         <li><a href="#contact">Contact</a></li>
       </ul>
 
+      <span class="fb-status" id="fbStatus" title="Firebase status">⬤ Connecting…</span>
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">☀️</button>
     </nav>
   </header>
@@ -167,6 +168,7 @@
   <div class="popup" id="bookingPopup" aria-live="polite"><div class="popup-card glass-card"><h3>Booking Confirmed</h3><p id="popupMessage">Your meal has been successfully reserved.</p><button class="btn btn-primary" id="closePopup">Close</button></div></div>
 
   <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore-compat.js"></script>
   <script src="script.js"></script>
 </body>
