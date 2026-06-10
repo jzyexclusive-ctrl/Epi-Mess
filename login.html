@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EPI MESS | Login</title>
+  <meta name="description" content="Login page for EPI MESS admin and client access." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body id="loginPage">
+  <div class="page-glow"></div>
+  <div class="cursor-glow"></div>
+
+  <header class="topbar" id="top">
+    <nav class="nav container">
+      <a class="logo" href="index.html">
+        <span class="logo-mark">EPI</span>
+        <span class="logo-sub">MESS</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="login.html" class="active">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="section container auth-page">
+      <div class="section-heading">
+        <p class="eyebrow">Access Control</p>
+        <h2>Admin & Client Login</h2>
+      </div>
+
+      <div class="auth-grid">
+        <article class="glass-card auth-card">
+          <h3>Sign In</h3>
+          <form id="loginForm">
+            <label>Email<input type="email" id="loginEmail" placeholder="you@example.com" required /></label>
+            <label>Password<input type="password" id="loginPassword" placeholder="••••••••" required /></label>
+            <label>Admin Passcode<input type="password" id="loginAdminPasscode" placeholder="Admin passcode (if admin)" /></label>
+            <button class="btn btn-primary" type="submit">Login</button>
+          </form>
+          <p id="loginStatus" class="auth-status">Enter your credentials to continue.</p>
+        </article>
+
+        <article class="glass-card auth-card">
+          <h3>Create Account</h3>
+          <form id="registerForm">
+            <label>Email<input type="email" id="registerEmail" placeholder="newuser@example.com" required /></label>
+            <label>Password<input type="password" id="registerPassword" placeholder="Create a password" required /></label>
+            <label>Role<select id="registerRole" required>
+              <option value="client">Client</option>
+              <option value="admin">Admin</option>
+            </select></label>
+            <label>Admin Passcode<input type="password" id="registerAdminPasscode" placeholder="Admin passcode (required for admin)" /></label>
+            <button class="btn btn-secondary" type="submit">Create Account</button>
+          </form>
+          <p id="registerStatus" class="auth-status">Choose admin or client to set the account role.</p>
+        </article>
+      </div>
+
+      <p class="auth-note">Admin access is for mess managers. Client access is for students and guests using the booking system.</p>
+    </section>
+  </main>
+
+  <script src="auth.js"></script>
+</body>
+</html>

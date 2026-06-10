@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EPI MESS | Client Dashboard</title>
+  <meta name="description" content="Client dashboard for EPI MESS." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body id="clientPage">
+  <div class="page-glow"></div>
+  <div class="cursor-glow"></div>
+
+  <header class="topbar" id="top">
+    <nav class="nav container">
+      <a class="logo" href="index.html">
+        <span class="logo-mark">EPI</span>
+        <span class="logo-sub">MESS</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="login.html">Switch User</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="section container auth-page">
+      <div class="section-heading">
+        <p class="eyebrow">Client Dashboard</p>
+        <h2>Welcome, Client</h2>
+      </div>
+
+      <article class="glass-card auth-card role-card">
+        <h3 id="roleTitle">Client Access</h3>
+        <p id="roleInfo">Loading your role information...</p>
+        <p>Book meals, check your attendance, and manage your profile from here.</p>
+        <button id="logoutBtn" class="btn btn-primary">Logout</button>
+      </article>
+    </section>
+  </main>
+
+  <script src="auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>EPI MESS | Admin Bookings</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .admin-wrap { padding: 40px 0; }
+    .bookings-list { display: grid; gap: .5rem; }
+    .booking-item { padding: .8rem; border-radius: 12px; background: rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.04); }
+    .booking-meta { font-size: .9rem; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <header class="topbar"><nav class="nav container"><a class="logo" href="index.html"><span class="logo-mark">EPI</span><span class="logo-sub">MESS</span></a><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="login.html">Switch User</a></li></ul></nav></header>
+  <main class="container admin-wrap">
+    <h2>Admin — Bookings</h2>
+    <p id="adminInfo" class="auth-note">Loading...</p>
+    <div id="bookings" class="bookings-list"></div>
+  </main>
+  <script src="auth.js"></script>
+  <script>
+    async function loadBookings() {
+      const token = localStorage.getItem('epiToken');
+      if (!token) { document.getElementById('adminInfo').textContent = 'Please login as admin.'; return; }
+      try {
+        const res = await fetch('http://localhost:5000/admin/bookings', { headers: { Authorization: 'Bearer '+token } });
+        const data = await res.json();
+        if (!res.ok) { document.getElementById('adminInfo').textContent = data.message || 'Access denied'; return; }
+        document.getElementById('adminInfo').textContent = `Showing ${data.bookings.length} bookings`;
+        const container = document.getElementById('bookings');
+        container.innerHTML = '';
+        data.bookings.forEach(b => {
+          const el = document.createElement('div'); el.className = 'booking-item';
+          el.innerHTML = `<strong>${b.order.mealType} × ${b.order.quantity}</strong><div class="booking-meta">${b.user.email} • ${new Date(b.createdAt).toLocaleString()}</div>`;
+          container.appendChild(el);
+        });
+      } catch (err) { document.getElementById('adminInfo').textContent = 'Failed to load bookings.'; }
+    }
+    loadBookings();
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EPI MESS | Admin Dashboard</title>
+  <meta name="description" content="Admin dashboard for EPI MESS." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body id="adminPage">
+  <div class="page-glow"></div>
+  <div class="cursor-glow"></div>
+
+  <header class="topbar" id="top">
+    <nav class="nav container">
+      <a class="logo" href="index.html">
+        <span class="logo-mark">EPI</span>
+        <span class="logo-sub">MESS</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="login.html">Switch User</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="section container auth-page">
+      <div class="section-heading">
+        <p class="eyebrow">Admin Panel</p>
+        <h2>Welcome, Admin</h2>
+      </div>
+
+      <article class="glass-card auth-card role-card">
+        <h3 id="roleTitle">Admin Access</h3>
+        <p id="roleInfo">Loading your role information...</p>
+        <p>Use this page to manage bookings, monitor attendance, and update notifications.</p>
+        <button id="logoutBtn" class="btn btn-primary">Logout</button>
+      </article>
+    </section>
+  </main>
+
+  <script src="auth.js"></script>
+</body>
+</html>

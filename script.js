@@ -11,6 +11,7 @@ const firebaseConfig = {
 let db = null;
 let auth = null;
 let currentUser = null;
+let currentUserRole = "guest";
 
 const fbStatus = document.getElementById("fbStatus");
 
@@ -44,14 +45,89 @@ try {
     });
 
   // Listen for auth state changes
-  auth.onAuthStateChanged((user) => {
+  auth.onAuthStateChanged(async (user) => {
     currentUser = user;
+    currentUserRole = "guest";
+
+    if (user && db) {
+      try {
+        const snap = await db.collection("users").doc(user.uid).get();
+        if (snap.exists) {
+          currentUserRole = snap.data().role || "client";
+        } else if (user.email) {
+          currentUserRole = user.email.includes("admin") ? "admin" : "client";
+        }
+      } catch (err) {
+        console.warn("Role lookup failed:", err);
+      }
+    }
+
+    updateAuthUI();
   });
 
 } catch (err) {
   console.warn("Firebase init failed:", err);
   setFbStatus("offline");
 }
+
+// ─── Auth UI ───────────────────────────────────────────────────────────────
+const loginForm = document.getElementById("loginForm");
+const registerForm = document.getElementById("registerForm");
+const authStatus = document.getElementById("authStatus");
+const logoutBtn = document.getElementById("logoutBtn");
+
+function updateAuthUI() {
+  if (!authStatus || !logoutBtn) return;
+
+  if (currentUser) {
+    authStatus.textContent = `Signed in as ${currentUser.email || "user"} (${currentUserRole}).`;
+    logoutBtn.style.display = "inline-block";
+  } else {
+    authStatus.textContent = "You are using the guest mode right now.";
+    logoutBtn.style.display = "none";
+  }
+}
+
+logoutBtn?.addEventListener("click", async () => {
+  try {
+    await auth.signOut();
+    currentUserRole = "guest";
+    updateAuthUI();
+  } catch (err) {
+    console.error("Logout failed:", err);
+  }
+});
+
+loginForm?.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const email = document.getElementById("loginEmail").value.trim();
+  const password = document.getElementById("loginPassword").value;
+
+  try {
+    await auth.signInWithEmailAndPassword(email, password);
+    authStatus.textContent = "Logged in successfully.";
+  } catch (err) {
+    console.error("Login failed:", err);
+    authStatus.textContent = "Login failed. Please check your email and password.";
+  }
+});
+
+registerForm?.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const email = document.getElementById("registerEmail").value.trim();
+  const password = document.getElementById("registerPassword").value;
+  const role = document.getElementById("registerRole").value;
+
+  try {
+    const cred = await auth.createUserWithEmailAndPassword(email, password);
+    await db.collection("users").doc(cred.user.uid).set({ role, email, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
+    authStatus.textContent = `${role.charAt(0).toUpperCase() + role.slice(1)} account created successfully.`;
+    registerForm.reset();
+  } catch (err) {
+    console.error("Registration failed:", err);
+    authStatus.textContent = "Account creation failed. Try another email or password.";
+  }
+});
 
 // ─── Theme ───────────────────────────────────────────────────────────────────
 const themeToggle   = document.getElementById("themeToggle");
@@ -144,14 +220,15 @@ const progressObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll(".progress-bar span").forEach((bar) => progressObserver.observe(bar));
 
 // ─── Meal Booking Form ────────────────────────────────────────────────────────
-const bookingForm  = document.getElementById("bookingForm");
-const previewText  = document.getElementById("previewText");
-const popup        = document.getElementById("bookingPopup");
-const popupMessage = document.getElementById("popupMessage");
-const closePopup   = document.getElementById("closePopup");
-const bookingDate  = document.getElementById("bookingDate");
-const mealType     = document.getElementById("mealType");
-const mealCount    = document.getElementById("mealCount");
+const bookingForm   = document.getElementById("bookingForm");
+const previewText   = document.getElementById("previewText");
+const bookingStatus = document.getElementById("bookingStatus");
+const popup         = document.getElementById("bookingPopup");
+const popupMessage  = document.getElementById("popupMessage");
+const closePopup    = document.getElementById("closePopup");
+const bookingDate   = document.getElementById("bookingDate");
+const mealType      = document.getElementById("mealType");
+const mealCount     = document.getElementById("mealCount");
 
 function updatePreview() {
   const date  = bookingDate.value || "selected date";
@@ -174,28 +251,57 @@ bookingForm.addEventListener("submit", async (e) => {
   btn.textContent = "Saving…";
   btn.disabled = true;
 
+  const token = localStorage.getItem("epiToken");
+  if (!token) {
+    alert("Please login first to place an order.");
+    btn.textContent = "Confirm Booking";
+    btn.disabled = false;
+    return;
+  }
+
+  const orderData = {
+    date,
+    mealType: type,
+    quantity: count,
+  };
+
   try {
-    if (db) {
-      await db.collection("bookings").add({
-        date,
-        mealType:  type,
-        mealCount: count,
-        userId:    currentUser ? currentUser.uid : "guest",
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-      });
+    const response = await fetch("http://localhost:5000/order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(orderData),
+    });
+
+    const data = await response.json();
+    console.log("Backend order response:", data);
+
+    if (!response.ok) {
+      throw new Error(data.message || "Failed to place order");
     }
+
+    bookingStatus.textContent = "Order placed successfully!";
+    bookingStatus.classList.remove("warn");
+    bookingStatus.classList.add("safe");
   } catch (err) {
-    console.warn("Booking save failed:", err);
+    console.error("Booking submission failed:", err);
+    bookingStatus.textContent = err.message || "Failed to place order";
+    bookingStatus.classList.remove("safe");
+    bookingStatus.classList.add("warn");
   }
 
   btn.textContent = "Confirm Booking";
   btn.disabled = false;
 
-  popupMessage.textContent = `Confirmed: ${count} ${type.toLowerCase()} meal(s) for ${date}.`;
-  popup.classList.add("show");
-  bookingForm.reset();
-  previewText.textContent = "Select your desired date and meal to preview your booking.";
-  loadMyBookings();
+  if (bookingStatus.classList.contains("safe")) {
+    popupMessage.textContent = `Confirmed: ${count} ${type.toLowerCase()} meal(s) for ${date}.`;
+    popup.classList.add("show");
+    bookingForm.reset();
+    previewText.textContent = "Select your desired date and meal to preview your booking.";
+    loadMyBookings();
+  }
 });
 closePopup.addEventListener("click", () => popup.classList.remove("show"));
 popup.addEventListener("click", (e) => { if (e.target === popup) popup.classList.remove("show"); });

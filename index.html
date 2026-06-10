@@ -30,6 +30,7 @@
         <li><a href="#feedback">Feedback</a></li>
         <li><a href="#notifications">Notifications</a></li>
         <li><a href="#contact">Contact</a></li>
+        <li><a href="login.html">Login</a></li>
       </ul>
 
       <span class="fb-status" id="fbStatus" title="Firebase status">⬤ Connecting…</span>
@@ -119,6 +120,7 @@
           <label>Meal Type<select id="mealType" required><option value="">Choose meal</option><option>Breakfast</option><option>Lunch</option><option>Snacks</option><option>Dinner</option></select></label>
           <label>Number of Meals<input type="number" id="mealCount" min="1" max="5" value="1" required /></label>
           <button class="btn btn-primary btn-animate" type="submit">Confirm Booking</button>
+          <p id="bookingStatus" class="booking-status">Please login to place a booking.</p>
         </form>
         <article class="glass-card booking-summary"><h3>Booking Preview</h3><p id="previewText">Select your desired date and meal to preview your booking.</p><div class="summary-badges"><span>Fast confirmation</span><span>Smart reminders</span><span>Flexible slot selection</span></div></article>
       </div>
